@@ -23,7 +23,7 @@ export const COMPANY = {
   name: 'IBees Jobs',
   tagline: 'Connecting Talent with Opportunities',
   email: 'ibeesjobs@gmail.com',
-  phones: ['+91 62380 78365', '+91 95444 29313'],
+  phones: ['+91 62380 78365', '+91 95444 29313', '+91 70126 32399'],
   whatsapp: '919544429313',
   address: 'TC. 97/2440, Near Infosys, Thampuranmukku, Kazhakootom, Thiruvananthapuram, Kerala, India, 695583',
 } as const;
