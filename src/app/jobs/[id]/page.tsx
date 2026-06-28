@@ -41,14 +41,8 @@ export default function JobDetailPage() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs sm:text-sm text-blue-200">
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-blue-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              {job.location}
+              Contact Office for Location Details
             </span>
-            {job.salary_range && (
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-blue-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                {job.salary_range}
-              </span>
-            )}
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-blue-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               Posted {new Date(job.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -63,28 +57,20 @@ export default function JobDetailPage() {
           {/* Main Description & Criteria */}
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-white rounded-3xl border border-gray-100 p-6 sm:p-8 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-50">Job Description</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-50">Job Info</h2>
               <div className="prose prose-sm text-gray-600 max-w-none">
                 <p className="whitespace-pre-line leading-relaxed text-sm sm:text-base">{job.description}</p>
               </div>
 
               {/* Job Requirements & Criteria */}
-              {(job.qualification || job.experience) && (
+              {job.qualification && (
                 <div className="mt-8 pt-6 border-t border-gray-100">
                   <h3 className="text-base font-bold text-gray-900 mb-4">Requirements & Criteria</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {job.qualification && (
-                      <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
-                        <span className="block text-[10px] text-gray-400 uppercase tracking-wider font-bold mb-1">Minimum Qualification</span>
-                        <span className="text-sm font-semibold text-gray-800">{job.qualification}</span>
-                      </div>
-                    )}
-                    {job.experience && (
-                      <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
-                        <span className="block text-[10px] text-gray-400 uppercase tracking-wider font-bold mb-1">Required Experience</span>
-                        <span className="text-sm font-semibold text-gray-800">{job.experience}</span>
-                      </div>
-                    )}
+                    <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                      <span className="block text-[10px] text-gray-400 uppercase tracking-wider font-bold mb-1">Minimum Qualification</span>
+                      <span className="text-sm font-semibold text-gray-800">{job.qualification}</span>
+                    </div>
                   </div>
                 </div>
               )}
@@ -157,22 +143,20 @@ export default function JobDetailPage() {
                   </div>
                   <div>
                     <span className="block text-[9px] uppercase font-bold text-gray-400 tracking-wider">Location</span>
-                    <span className="text-sm font-bold text-gray-800">{job.location}</span>
+                    <span className="text-sm font-bold text-gray-800">Contact Office for Details</span>
                   </div>
                 </div>
 
                 {/* Salary */}
-                {job.salary_range && (
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center text-[#0D1B5E] flex-shrink-0">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    </div>
-                    <div>
-                      <span className="block text-[9px] uppercase font-bold text-gray-400 tracking-wider">Salary Range</span>
-                      <span className="text-sm font-bold text-gray-800">{job.salary_range}</span>
-                    </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center text-[#0D1B5E] flex-shrink-0">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   </div>
-                )}
+                  <div>
+                    <span className="block text-[9px] uppercase font-bold text-gray-400 tracking-wider">Salary Range</span>
+                    <span className="text-sm font-bold text-gray-800">Contact Office (Competitive)</span>
+                  </div>
+                </div>
 
                 {/* Qualification */}
                 {job.qualification && (
@@ -185,19 +169,6 @@ export default function JobDetailPage() {
                       <span className="text-sm font-bold text-gray-800">{job.qualification}</span>
                     </div>
                   </div>
-                )}
-
-                {/* Experience */}
-                {job.experience && (
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center text-[#0D1B5E] flex-shrink-0">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                  </div>
-                  <div>
-                    <span className="block text-[9px] uppercase font-bold text-gray-400 tracking-wider">Experience Required</span>
-                    <span className="text-sm font-bold text-gray-800">{job.experience}</span>
-                  </div>
-                </div>
                 )}
               </div>
             </div>
