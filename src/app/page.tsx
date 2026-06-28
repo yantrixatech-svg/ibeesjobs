@@ -270,11 +270,16 @@ export default function Home() {
               { text: "Very prompt and professional service. The staff helped map my nursing credentials and placed me at a premium clinic. The direct communication via WhatsApp was excellent.", author: "Anjali G. Nair", role: "Staff Nurse" },
               { text: "I was looking for accounts executive vacancies near Thiruvananthapuram. IBees Jobs found me an opening in Technopark. The direct communication was excellent.", author: "Rahul Madhav", role: "Junior Accountant" }
             ].map((item, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm relative">
-                <div className="text-4xl text-blue-200 absolute top-4 right-6 font-serif select-none pointer-events-none">“</div>
-                <p className="text-xs text-gray-500 italic mb-6 leading-relaxed relative z-10">{item.text}</p>
-                <div>
-                  <h4 className="font-bold text-gray-900 text-xs">{item.author}</h4>
+              <div key={idx} className="bg-gray-50 rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm relative overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow">
+                {/* Decorative Quote Mark SVG */}
+                <div className="absolute top-4 right-6 text-blue-500/10 pointer-events-none">
+                  <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-500 italic mb-6 leading-relaxed relative z-10">{item.text}</p>
+                <div className="relative z-10">
+                  <h4 className="font-bold text-gray-900 text-xs sm:text-sm">{item.author}</h4>
                   <p className="text-[10px] text-gray-400 mt-0.5">{item.role}</p>
                 </div>
               </div>
