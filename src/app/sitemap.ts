@@ -3,7 +3,7 @@ import { STATIC_JOBS } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Configurable base URL for deployment
-  const baseUrl = 'https://www.ibeesjobs.com';
+  const baseUrl = 'https://ibeesjobs.in';
 
   // Core static pages
   const routes = ['', '/about', '/contact', '/jobs'].map((route) => ({
