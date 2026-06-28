@@ -1,13 +1,14 @@
-'use client';
-
-import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { STATIC_JOBS, COMPANY } from '@/lib/constants';
 import ApplyForm from '@/components/ApplyForm';
 
-export default function JobDetailPage() {
-  const params = useParams();
+export function generateStaticParams() {
+  return STATIC_JOBS.map((job) => ({
+    id: job.id,
+  }));
+}
 
+export default function JobDetailPage({ params }: { params: { id: string } }) {
   // Find job from static array
   const job = STATIC_JOBS.find((j) => j.id === params.id && j.is_active) || null;
 

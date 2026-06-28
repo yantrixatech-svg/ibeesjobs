@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { COMPANY } from '@/lib/constants';
+import { COMPANY, BASE_PATH } from '@/lib/constants';
 
 export default function Footer() {
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 group">
               <Image
-                src="/logo-small.jpg"
+                src={`${BASE_PATH}/logo-small.jpg`}
                 alt="IBees Jobs"
                 width={48}
                 height={48}

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { STATIC_JOBS, COMPANY, getSectorForCategory } from '@/lib/constants';
+import { STATIC_JOBS, COMPANY, getSectorForCategory, BASE_PATH } from '@/lib/constants';
 import LatestJobsGrid from '@/components/LatestJobsGrid';
 
 const stats = [
@@ -95,7 +95,7 @@ export default function Home() {
             <div className="flex justify-center z-20">
               <div className="relative bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-2xl transition-all duration-300">
                 <Image
-                  src="/logo.png"
+                  src={`${BASE_PATH}/logo.png`}
                   alt="IBees Jobs Logo"
                   width={350}
                   height={200}

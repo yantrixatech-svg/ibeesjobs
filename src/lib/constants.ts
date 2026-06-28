@@ -17,6 +17,8 @@ export const JOB_CATEGORIES = [
   'Mobile Technician', 'Network Administration', 'Nurse', 'Office Co-Ordinator'
 ] as const;
 
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export const COMPANY = {
   name: 'IBees Jobs',
   tagline: 'Connecting Talent with Opportunities',

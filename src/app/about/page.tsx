@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { BASE_PATH } from '@/lib/constants';
 
 const values = [
   {
@@ -59,7 +60,7 @@ export default function AboutPage() {
           <div className="relative flex justify-center">
             <div className="relative bg-white rounded-3xl p-6 border border-gray-100 shadow-xl max-w-md w-full">
               <Image
-                src="/logo.png"
+                src={`${BASE_PATH}/logo.png`}
                 alt="IBees Jobs Logo"
                 width={320}
                 height={180}

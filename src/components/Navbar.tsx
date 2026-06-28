@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { BASE_PATH } from '@/lib/constants';
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,7 +23,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/logo-small.jpg"
+              src={`${BASE_PATH}/logo-small.jpg`}
               alt="IBees Jobs"
               width={48}
               height={48}
