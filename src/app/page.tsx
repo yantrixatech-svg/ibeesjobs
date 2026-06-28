@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { STATIC_JOBS, COMPANY, getSectorForCategory, BASE_PATH } from '@/lib/constants';
 import LatestJobsGrid from '@/components/LatestJobsGrid';
+import InquiryForm from '@/components/InquiryForm';
 
 const stats = [
   { value: `${STATIC_JOBS.length}`, label: 'Live Jobs Available' },
@@ -146,7 +147,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Sourcing developers, project managers, database administrators, and QA specialists for IT firms in Technopark Thiruvananthapuram and Infopark Kochi.
               </p>
-              <Link href="/jobs?category=IT" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Tech Jobs →</Link>
+              <a href="#inquiry-it" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire Tech Jobs <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></a>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300">
               <div className="w-12 h-12 bg-blue-50 text-[#0D1B5E] rounded-xl flex items-center justify-center mb-6">
@@ -156,7 +157,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Placing administrative officers, executive assistants, corporate accountants, sales representatives, and customer managers in commercial sectors.
               </p>
-              <Link href="/jobs?category=Non-IT" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Office Jobs →</Link>
+              <a href="#inquiry-office" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire Office Jobs <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></a>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300">
               <div className="w-12 h-12 bg-blue-50 text-[#0D1B5E] rounded-xl flex items-center justify-center mb-6">
@@ -166,8 +167,15 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Assisting skilled workers, technicians, healthcare nurses, and structural engineers secure placements in GCC and European markets.
               </p>
-              <Link href="/jobs?category=Abroad" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire For Abroad →</Link>
+              <a href="#inquiry-abroad" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire For Abroad <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg></a>
             </div>
+          </div>
+
+          {/* Inquiry Forms */}
+          <div className="mt-16 grid md:grid-cols-3 gap-8">
+            <InquiryForm domain="it" domainLabel="IT & Tech Jobs" />
+            <InquiryForm domain="office" domainLabel="Office & Non-IT Jobs" />
+            <InquiryForm domain="abroad" domainLabel="Overseas & Abroad Jobs" />
           </div>
         </div>
       </section>
