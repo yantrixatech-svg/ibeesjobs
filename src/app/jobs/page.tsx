@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { STATIC_JOBS } from '@/lib/constants';
 import JobCard from '@/components/JobCard';
 import CategoryFilter from '@/components/CategoryFilter';
+import CustomInquiryForm from '@/components/CustomInquiryForm';
 
 function JobsContent() {
   const searchParams = useSearchParams();
@@ -24,13 +25,14 @@ function JobsContent() {
         return false;
       }
 
-      // Filter by search query (case-insensitive title lookup)
+      // Filter by search query
       if (searchQuery) {
         const query = searchQuery.toLowerCase().trim();
         const matchesTitle = job.title.toLowerCase().includes(query);
         const matchesDesc = job.description.toLowerCase().includes(query);
         const matchesLoc = job.location.toLowerCase().includes(query);
-        if (!matchesTitle && !matchesDesc && !matchesLoc) {
+        const matchesCat = job.category.toLowerCase().includes(query);
+        if (!matchesTitle && !matchesDesc && !matchesLoc && !matchesCat) {
           return false;
         }
       }
@@ -46,7 +48,7 @@ function JobsContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Find Your Dream Job</h1>
           <p className="text-blue-200 max-w-2xl mx-auto mb-8">
-            Browse through our current openings in IT, Office, and International sectors.
+            Browse through our current openings across 56 distinct categories
           </p>
           
           {/* Keyword Search Input */}
@@ -60,7 +62,7 @@ function JobsContent() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search jobs by title or location..."
+                  placeholder="Search jobs by title, category, or location..."
                   className="w-full bg-transparent text-gray-950 placeholder-gray-400 focus:outline-none py-2 text-sm sm:text-base"
                 />
               </div>
@@ -70,7 +72,7 @@ function JobsContent() {
       </section>
 
       {/* Grid Results layout */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Sidebar Filter Selector */}
           <aside className="w-full md:w-64 flex-shrink-0">
@@ -95,7 +97,7 @@ function JobsContent() {
             <div className="flex items-center justify-between mb-6">
               <p className="text-sm text-gray-500 font-medium">
                 {filteredJobs.length} job{filteredJobs.length !== 1 ? 's' : ''} found
-                {selectedCategory && <span className="text-[#0D1B5E]"> in {selectedCategory} sector</span>}
+                {selectedCategory && <span className="text-[#0D1B5E]"> in {selectedCategory}</span>}
               </p>
             </div>
 
@@ -119,6 +121,13 @@ function JobsContent() {
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Custom Inquiry Section */}
+      <section className="bg-white border-t border-gray-100 py-16 md:py-20 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CustomInquiryForm />
         </div>
       </section>
     </div>
