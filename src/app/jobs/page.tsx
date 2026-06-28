@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState, useCallback, Suspense } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { Job } from '@/lib/types';
+import { STATIC_JOBS } from '@/lib/constants';
 import JobCard from '@/components/JobCard';
 import CategoryFilter from '@/components/CategoryFilter';
 
@@ -11,44 +10,34 @@ function JobsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || '';
 
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
-  const fetchJobs = useCallback(async () => {
-    setLoading(true);
-    let query = supabase
-      .from('jobs')
-      .select('*')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false });
+  // Perform search and filtering synchronously in memory
+  const filteredJobs = useMemo(() => {
+    return STATIC_JOBS.filter((job) => {
+      // Must be active
+      if (!job.is_active) return false;
 
-    if (selectedCategory) {
-      query = query.eq('category', selectedCategory);
-    }
+      // Filter by category
+      if (selectedCategory && job.category !== selectedCategory) {
+        return false;
+      }
 
-    if (searchQuery) {
-      query = query.ilike('title', `%${searchQuery}%`);
-    }
+      // Filter by search query (case-insensitive title lookup)
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase().trim();
+        const matchesTitle = job.title.toLowerCase().includes(query);
+        const matchesDesc = job.description.toLowerCase().includes(query);
+        const matchesLoc = job.location.toLowerCase().includes(query);
+        if (!matchesTitle && !matchesDesc && !matchesLoc) {
+          return false;
+        }
+      }
 
-    const { data, error } = await query;
-
-    if (error) {
-      console.error('Error fetching jobs:', error);
-    } else {
-      setJobs(data || []);
-    }
-    setLoading(false);
+      return true;
+    });
   }, [selectedCategory, searchQuery]);
-
-  useEffect(() => {
-    fetchJobs();
-  }, [fetchJobs]);
-
-  useEffect(() => {
-    setSelectedCategory(initialCategory);
-  }, [initialCategory]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +46,7 @@ function JobsContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Find Your Dream Job</h1>
           <p className="text-blue-200 max-w-2xl mx-auto mb-8">
-            Browse through hundreds of opportunities across 41+ categories
+            Browse through our current openings in IT, Office, and International sectors.
           </p>
           
           {/* Keyword Search Input */}
@@ -71,21 +60,10 @@ function JobsContent() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      fetchJobs();
-                    }
-                  }}
-                  placeholder="Search jobs by title..."
+                  placeholder="Search jobs by title or location..."
                   className="w-full bg-transparent text-gray-950 placeholder-gray-400 focus:outline-none py-2 text-sm sm:text-base"
                 />
               </div>
-              <button 
-                onClick={fetchJobs}
-                className="px-5 sm:px-6 py-2.5 bg-[#0D1B5E] text-white text-sm font-semibold rounded-xl hover:bg-[#152478] transition-all duration-200 flex-shrink-0 shadow-sm active:scale-95"
-              >
-                Search
-              </button>
             </div>
           </div>
         </div>
@@ -115,41 +93,27 @@ function JobsContent() {
           {/* Job Listings Grid */}
           <div className="flex-1">
             <div className="flex items-center justify-between mb-6">
-              <p className="text-sm text-gray-500">
-                {loading ? 'Loading...' : `${jobs.length} job${jobs.length !== 1 ? 's' : ''} found`}
-                {selectedCategory && <span className="text-[#0D1B5E] font-medium"> in {selectedCategory}</span>}
+              <p className="text-sm text-gray-500 font-medium">
+                {filteredJobs.length} job{filteredJobs.length !== 1 ? 's' : ''} found
+                {selectedCategory && <span className="text-[#0D1B5E]"> in {selectedCategory} sector</span>}
               </p>
             </div>
 
-            {loading ? (
-              <div className="grid gap-4">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 animate-pulse">
-                    <div className="flex gap-3 mb-4">
-                      <div className="h-6 w-24 bg-gray-200 rounded-full"></div>
-                      <div className="h-6 w-16 bg-gray-200 rounded-full"></div>
-                    </div>
-                    <div className="h-5 w-3/4 bg-gray-200 rounded mb-3"></div>
-                    <div className="h-4 w-full bg-gray-100 rounded mb-2"></div>
-                    <div className="h-4 w-2/3 bg-gray-100 rounded"></div>
-                  </div>
-                ))}
-              </div>
-            ) : jobs.length === 0 ? (
-              <div className="text-center py-16">
+            {filteredJobs.length === 0 ? (
+              <div className="text-center py-16 bg-white rounded-2xl border border-gray-100 shadow-sm">
                 <div className="text-5xl mb-4">🔍</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">No jobs found</h3>
                 <p className="text-gray-500 mb-6">Try adjusting your search or filter criteria</p>
                 <button
                   onClick={() => { setSearchQuery(''); setSelectedCategory(''); }}
-                  className="px-6 py-2.5 bg-[#0D1B5E] text-white text-sm font-medium rounded-xl hover:bg-[#1a2d7c] transition-all"
+                  className="px-6 py-2.5 bg-[#0D1B5E] text-white text-sm font-medium rounded-xl hover:bg-[#1a2d7c] transition-all active:scale-95"
                 >
                   Clear all filters
                 </button>
               </div>
             ) : (
               <div className="grid gap-4">
-                {jobs.map((job) => (
+                {filteredJobs.map((job) => (
                   <JobCard key={job.id} job={job} />
                 ))}
               </div>

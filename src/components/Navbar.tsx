@@ -44,12 +44,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/admin"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-500 hover:text-[#0D1B5E] hover:bg-blue-50 transition-all duration-200"
-            >
-              Admin
-            </Link>
+
             <Link
               href="/jobs"
               className="ml-2 px-5 py-2.5 bg-[#0D1B5E] text-white text-sm font-semibold rounded-xl hover:bg-[#1a2d7c] hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 active:scale-95"
@@ -92,13 +87,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/admin"
-            onClick={() => setIsOpen(false)}
-            className="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:text-[#0D1B5E] hover:bg-blue-50 transition-all"
-          >
-            Admin
-          </Link>
+
           <Link
             href="/jobs"
             onClick={() => setIsOpen(false)}

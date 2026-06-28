@@ -49,12 +49,12 @@ export default function AboutPage() {
               />
               <div className="mt-6 pt-6 border-t border-gray-100 grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-[#0D1B5E]">500+</div>
-                  <div className="text-xs text-gray-400">Jobs Listed</div>
+                  <div className="text-2xl font-bold text-[#0D1B5E]">40+</div>
+                  <div className="text-xs text-gray-400">Active Jobs</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-green-600">1000+</div>
-                  <div className="text-xs text-gray-400">Placed Candidates</div>
+                  <div className="text-2xl font-bold text-[#0D1B5E]">3</div>
+                  <div className="text-xs text-gray-400">Core Sectors</div>
                 </div>
               </div>
             </div>

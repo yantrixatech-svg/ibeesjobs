@@ -1,74 +1,39 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Job } from '@/lib/types';
+import { STATIC_JOBS, COMPANY } from '@/lib/constants';
 import LatestJobsGrid from '@/components/LatestJobsGrid';
 
 const stats = [
-  { value: '500+', label: 'Verified Vacancies' },
-  { value: '1,200+', label: 'Placements Completed' },
+  { value: `${STATIC_JOBS.length}`, label: 'Live Jobs Available' },
   { value: '150+', label: 'Corporate Partners' },
-  { value: '41', label: 'Specialized Domains' },
+  { value: '3', label: 'Recruitment Sectors' },
 ];
 
 const categories = [
-  { name: 'IT & Software', icon: (
-    <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-  ), count: '50+' },
-  { name: 'Healthcare', icon: (
-    <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-  ), count: '30+' },
-  { name: 'Finance & Accounts', icon: (
-    <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-  ), count: '25+' },
-  { name: 'Engineering & Construction', icon: (
-    <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
-  ), count: '40+' },
-];
-
-const fallbackJobs: Job[] = [
   {
-    id: 'f1',
-    title: 'Senior 3Ds Max Visualizer',
-    category: '3Ds Max Designer',
-    location: 'Thiruvananthapuram, Kerala',
-    type: 'Full-time',
-    salary_range: '₹25,000 - ₹40,000/month',
-    description: 'We are seeking an experienced 3Ds Max Designer for architectural rendering and visual engineering projects. Proficiency in V-Ray, Corona, and polygon modeling required.',
-    qualification: 'Degree/Diploma in Design',
-    experience: '2+ years',
-    is_active: true,
-    created_at: new Date().toISOString()
+    name: 'IT',
+    icon: (
+      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+    ),
+    count: `${STATIC_JOBS.filter(j => j.category === 'IT').length} active roles`
   },
   {
-    id: 'f2',
-    title: 'Junior Accounts Executive',
-    category: 'Accountant',
-    location: 'Technopark, Thiruvananthapuram',
-    type: 'Full-time',
-    salary_range: '₹18,000 - ₹25,000/month',
-    description: 'Looking for a commerce graduate to manage day-to-day transaction records, assist with audits, and prepare financial ledgers. Proficiency in Tally ERP9 and MS Excel is essential.',
-    qualification: 'B.Com / M.Com',
-    experience: 'Freshers & experienced',
-    is_active: true,
-    created_at: new Date().toISOString()
+    name: 'Non-IT',
+    icon: (
+      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0V9a2 2 0 012-2h2a2 2 0 012 2v12m-6 0h6" /></svg>
+    ),
+    count: `${STATIC_JOBS.filter(j => j.category === 'Non-IT').length} active roles`
   },
   {
-    id: 'f3',
-    title: 'ICU Registered Nurse',
-    category: 'Nurse',
-    location: 'Kazhakootom, Kerala',
-    type: 'Full-time',
-    salary_range: '₹22,000 - ₹35,000/month',
-    description: 'Manpower requirement for a leading multi-specialty healthcare center near Kazhakootom. Candidates must have KNMC registration and ICU critical care certifications.',
-    qualification: 'B.Sc Nursing / GNM',
-    experience: '1+ years',
-    is_active: true,
-    created_at: new Date().toISOString()
-  }
+    name: 'Abroad',
+    icon: (
+      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2.5M10.5 20.25a7.5 7.5 0 119.9-9.9" /></svg>
+    ),
+    count: `${STATIC_JOBS.filter(j => j.category === 'Abroad').length} active roles`
+  },
 ];
 
 export default function Home() {
-
   return (
     <div>
       {/* Hero Banner Section */}
@@ -115,7 +80,7 @@ export default function Home() {
               {/* WhatsApp Quick Apply */}
               <div className="mt-8">
                 <a
-                  href="https://wa.me/918075946173?text=Hi!%20I%20am%20interested%20in%20job%20opportunities."
+                  href={`https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent('Hi! I am interested in job opportunities.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-green-600 text-white text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-green-700 hover:shadow-lg transition-all duration-300"
@@ -154,7 +119,7 @@ export default function Home() {
       {/* Stats Board */}
       <section className="py-16 bg-gray-50 relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {stats.map((stat, index) => (
               <div key={index} className="text-center p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-100 transition-all duration-300">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0D1B5E] mb-1">{stat.value}</div>
@@ -169,7 +134,7 @@ export default function Home() {
       <section className="py-16 md:py-24 bg-white border-b border-gray-100 relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4"> man power recruitment domains</h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">Manpower Recruitment Domains</h2>
             <p className="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">We provide comprehensive recruiting services across major sectors.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -181,7 +146,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Sourcing developers, project managers, database administrators, and QA specialists for IT firms in Technopark Thiruvananthapuram and Infopark Kochi.
               </p>
-              <Link href="/jobs" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Tech Jobs →</Link>
+              <Link href="/jobs?category=IT" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Tech Jobs →</Link>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300">
               <div className="w-12 h-12 bg-blue-50 text-[#0D1B5E] rounded-xl flex items-center justify-center mb-6">
@@ -191,7 +156,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Placing administrative officers, executive assistants, corporate accountants, sales representatives, and customer managers in commercial sectors.
               </p>
-              <Link href="/jobs" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Office Jobs →</Link>
+              <Link href="/jobs?category=Non-IT" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Search Office Jobs →</Link>
             </div>
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300">
               <div className="w-12 h-12 bg-blue-50 text-[#0D1B5E] rounded-xl flex items-center justify-center mb-6">
@@ -201,7 +166,7 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4">
                 Assisting skilled workers, technicians, healthcare nurses, and structural engineers secure placements in GCC and European markets.
               </p>
-              <Link href="/contact" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire For Abroad →</Link>
+              <Link href="/jobs?category=Abroad" className="text-xs font-bold text-[#0D1B5E] hover:underline uppercase tracking-wider">Inquire For Abroad →</Link>
             </div>
           </div>
         </div>
@@ -220,29 +185,29 @@ export default function Home() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
-          <LatestJobsGrid fallbackJobs={fallbackJobs} />
+          <LatestJobsGrid />
         </div>
       </section>
 
-      {/* Explore Categories */}
+      {/* Explore Sectors */}
       <section className="py-16 md:py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mb-4">Explore Job Sectors</h2>
             <p className="text-xs sm:text-sm text-gray-500 max-w-2xl mx-auto">Click any sector card to filter current active opportunities.</p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.map((cat) => (
               <Link
                 key={cat.name}
-                href={`/jobs?category=${encodeURIComponent(cat.name === 'IT & Software' ? 'IT Jobs' : cat.name === 'Finance & Accounts' ? 'Accountant' : cat.name === 'Engineering & Construction' ? 'Civil Engineer' : cat.name)}`}
+                href={`/jobs?category=${encodeURIComponent(cat.name)}`}
                 className="group p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:bg-[#0D1B5E] hover:border-[#0D1B5E] hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-300 text-center"
               >
                 <div className="w-10 h-10 bg-white group-hover:bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
                   {cat.icon}
                 </div>
-                <h3 className="font-bold text-sm text-gray-900 group-hover:text-white transition-colors mb-1">{cat.name}</h3>
-                <p className="text-[10px] sm:text-xs text-gray-400 group-hover:text-blue-200 transition-colors">{cat.count} listings</p>
+                <h3 className="font-bold text-sm text-gray-900 group-hover:text-white transition-colors mb-1">{cat.name} Recruitment</h3>
+                <p className="text-[10px] sm:text-xs text-gray-400 group-hover:text-blue-200 transition-colors">{cat.count}</p>
               </Link>
             ))}
           </div>
@@ -302,7 +267,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { text: "I applied for a Visualizer role through IBees Jobs. The team coordinated my interview process with the firm in Kazhakootom within a week. I highly recommend their direct service.", author: "Sujith Kumar", role: "3Ds Max Designer" },
-              { text: "Very prompt and professional service. The staff helped map my nursing credentials and placed me at a premium clinic. My confirmation was received via email immediately.", author: "Anjali G. Nair", role: "Staff Nurse" },
+              { text: "Very prompt and professional service. The staff helped map my nursing credentials and placed me at a premium clinic. The direct communication via WhatsApp was excellent.", author: "Anjali G. Nair", role: "Staff Nurse" },
               { text: "I was looking for accounts executive vacancies near Thiruvananthapuram. IBees Jobs found me an opening in Technopark. The direct communication was excellent.", author: "Rahul Madhav", role: "Junior Accountant" }
             ].map((item, idx) => (
               <div key={idx} className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm relative">
