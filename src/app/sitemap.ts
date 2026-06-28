@@ -6,7 +6,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://ibeesjobs.in';
 
   // Core static pages
-  const routes = ['', '/about', '/contact', '/jobs'].map((route) => ({
+  const routes = [
+    '',
+    '/about',
+    '/contact',
+    '/jobs',
+    '/inquire/it',
+    '/inquire/office',
+    '/inquire/abroad'
+  ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
