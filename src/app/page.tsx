@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { STATIC_JOBS, COMPANY, getSectorForCategory, BASE_PATH } from '@/lib/constants';
+import { STATIC_JOBS, COMPANY, BASE_PATH } from '@/lib/constants';
 import LatestJobsGrid from '@/components/LatestJobsGrid';
 
 const stats = [
@@ -9,29 +9,6 @@ const stats = [
   { value: '3', label: 'Recruitment Sectors' },
 ];
 
-const categories = [
-  {
-    name: 'IT',
-    icon: (
-      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-    ),
-    count: `${STATIC_JOBS.filter(j => getSectorForCategory(j.category) === 'IT').length} active roles`
-  },
-  {
-    name: 'Non-IT',
-    icon: (
-      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0V9a2 2 0 012-2h2a2 2 0 012 2v12m-6 0h6" /></svg>
-    ),
-    count: `${STATIC_JOBS.filter(j => getSectorForCategory(j.category) === 'Non-IT').length} active roles`
-  },
-  {
-    name: 'Abroad',
-    icon: (
-      <svg className="w-6 h-6 text-[#0D1B5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2.5M10.5 20.25a7.5 7.5 0 119.9-9.9" /></svg>
-    ),
-    count: `${STATIC_JOBS.filter(j => getSectorForCategory(j.category) === 'Abroad').length} active roles`
-  },
-];
 
 export default function Home() {
   return (
@@ -189,30 +166,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Explore Sectors */}
-      <section className="py-16 md:py-24 bg-white relative z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mb-4">Explore Job Sectors</h2>
-            <p className="text-xs sm:text-sm text-gray-500 max-w-2xl mx-auto">Click any sector card to filter current active opportunities.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categories.map((cat) => (
-              <Link
-                key={cat.name}
-                href={`/jobs?category=${encodeURIComponent(cat.name)}`}
-                className="group p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:bg-[#0D1B5E] hover:border-[#0D1B5E] hover:shadow-xl hover:shadow-blue-900/10 transition-all duration-300 text-center"
-              >
-                <div className="w-10 h-10 bg-white group-hover:bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors">
-                  {cat.icon}
-                </div>
-                <h3 className="font-bold text-sm text-gray-900 group-hover:text-white transition-colors mb-1">{cat.name} Recruitment</h3>
-                <p className="text-[10px] sm:text-xs text-gray-400 group-hover:text-blue-200 transition-colors">{cat.count}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Quality Standards Section */}
       <section className="py-16 md:py-24 bg-gray-50 relative z-20">
